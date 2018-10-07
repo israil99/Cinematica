@@ -16,8 +16,8 @@
             android:gravity="left"
             android:orientation="vertical">
             <ImageView
-                android:layout_width="125dp"
-                android:layout_height="170dp"
+                android:layout_width="190dp"
+                android:layout_height="240dp"
                 android:background="#2d2d2d"
                 android:id="@+id/new_movie_image"
                 android:scaleType="centerCrop"

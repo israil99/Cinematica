@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.israil.cinmatica.Helper.Helper;
 import com.example.israil.cinmatica.NewMovieDetailsActivity;
 import com.example.israil.cinmatica.R;
 import com.example.israil.cinmatica.models.Movies.newMovies.NewResult;
@@ -44,7 +46,10 @@ public class NewMoviesAdapter extends RecyclerView.Adapter<NewMoviesAdapter.MyVi
         holder.cinemaNameTextView.setText(mCinemaList.get(position).getName());
         holder.cinemaNameTextView.setTag(mCinemaList.get(position).getId());
         Glide.with(mContext)
-                .load(getImageAdres(position))
+                .load(Helper.makeImageBetter("http://kinoafisha.ua/"+ mCinemaList.get(position).getImage()))
+                .dontTransform()
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
                 .into(holder.imageView);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -66,10 +71,7 @@ public class NewMoviesAdapter extends RecyclerView.Adapter<NewMoviesAdapter.MyVi
 
 
 
-    private String getImageAdres(final int position) {
-        String url = "http://kinoafisha.ua/"+ mCinemaList.get(position).getImage();
-        return url;
-    }
+
 
     @Override
     public int getItemCount() {

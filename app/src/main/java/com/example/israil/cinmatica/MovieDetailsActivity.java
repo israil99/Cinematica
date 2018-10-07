@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.israil.cinmatica.Helper.Helper;
 
 public class MovieDetailsActivity extends AppCompatActivity {
     private ImageView imageView;
@@ -43,8 +45,11 @@ public class MovieDetailsActivity extends AppCompatActivity {
         String countVotes = " "+intent.getExtras().getString("CountOfVotes");
 
         Glide.with(getApplicationContext())
-                .load(image)
+                .load(Helper.makeImageBetter(image))
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
                 .into(imageView);
+
         textView.setText(name);
         movieCountries.setText(countries);
         movieActors.setText(Html.fromHtml("<b>"+getString(R.string.actors)+"</b>"+actors));

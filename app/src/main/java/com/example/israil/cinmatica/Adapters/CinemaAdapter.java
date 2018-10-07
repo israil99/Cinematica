@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.israil.cinmatica.Helper.Helper;
 import com.example.israil.cinmatica.R;
 import com.example.israil.cinmatica.models.Cinemas.Unmain;
 import com.example.israil.cinmatica.models.Movies.Movies.Result;
@@ -43,15 +45,15 @@ public class CinemaAdapter extends RecyclerView.Adapter<CinemaAdapter.MyViewHold
         holder.cinemaAddres.setText(mCinemaList.get(position).getAddress());
         holder.cinemaPhone.setText(mCinemaList.get(position).getPhone());
         Glide.with(mContext)
-                .load(getImageAdres(position))
+                .load(Helper.makeImageBetter("http://kinoafisha.ua/"+ mCinemaList.get(position).getImage()))
+                .dontTransform()
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
                 .into(holder.imageView);
+
     }
 
 
-    private String getImageAdres(final int position) {
-        String url = "http://kinoafisha.ua/"+ mCinemaList.get(position).getImage();
-        return url;
-    }
 
 
     @Override

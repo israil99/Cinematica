@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.israil.cinmatica.Helper.Helper;
 import com.example.israil.cinmatica.MovieDetailsActivity;
 import com.example.israil.cinmatica.R;
 import com.example.israil.cinmatica.models.Movies.Movies.Result;
@@ -48,7 +50,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
         holder.cinemaNameTextView.setText(mCinemaList.get(position).getName());
         holder.cinemaNameTextView.setTag(mCinemaList.get(position).getId());
         Glide.with(mContext)
-                .load(getImageAdres(position))
+                .load(Helper.makeImageBetter("http://kinoafisha.ua/"+ mCinemaList.get(position).getImage()))
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
                 .into(holder.imageView);
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,10 +72,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
 
 
 
-    private String getImageAdres(final int position) {
-        String url = "http://kinoafisha.ua/"+ mCinemaList.get(position).getImage();
-        return url;
-    }
+
 
     @Override
     public int getItemCount() {
@@ -90,7 +91,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
             super(itemView);
 
             cinemaNameTextView = (TextView) itemView.findViewById(R.id.textview_cinema_name);
-            Toast.makeText(mContext,cinemaNameTextView.getText(),Toast.LENGTH_LONG).show();
             imageView = itemView.findViewById(R.id.cinema_image);
             cardView = itemView.findViewById(R.id.card_view);
 

@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.israil.cinmatica.Helper.Helper;
 
 public class NewMovieDetailsActivity extends AppCompatActivity {
     private ImageView imageView;
@@ -41,7 +43,9 @@ public class NewMovieDetailsActivity extends AppCompatActivity {
         String before = " "+intent.getExtras().getString("Before");
 
         Glide.with(getApplicationContext())
-                .load(image)
+                .load(Helper.makeImageBetter(image))
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
                 .into(imageView);
         newMovieName.setText(name);
         newMovieCountries.setText(countries);
