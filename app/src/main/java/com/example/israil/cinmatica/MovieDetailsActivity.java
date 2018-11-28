@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -56,7 +57,6 @@ public class MovieDetailsActivity extends AppCompatActivity {
         movieRejisser.setText(Html.fromHtml("<b>"+getString(R.string.rejisser)+"</b>"+rejisser));
         voteTxt.setText(Html.fromHtml("<b>"+getString(R.string.vote)+"</b>"+vote));
         countOfVotesTxt.setText(Html.fromHtml("<b>"+getString(R.string.countOfVotes)+"</b>"+countVotes));
-
 
 
     }

@@ -39,42 +39,44 @@ public class Tab3 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.tab3_context, container,false);
+        View rootView = inflater.inflate(R.layout.tab3_context, container, false);
         recyclerView = rootView.findViewById(R.id.recycler_view3);
 
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(cinemaAdapter);
-
+        //recyclerView.setAdapter(cinemaAdapter);
+        getUnmain();
 
         return rootView;
     }
 
 
-    @Override
+    public void getUnmain() {
+            final Api service = RetrofitClientInstance.getRetrofitInstance().create(Api.class);
+            Call<Cinemas> call = service.readCinemaList();
+                call.enqueue(new Callback<Cinemas>()
+
+            {
+                @Override
+                public void onResponse (Call < Cinemas > call, Response < Cinemas > response){
+
+                List<Unmain> unmain = response.body().getResult().getUnmain();
+                Log.d("Cinema", "" + unmain.size());
+
+                cinemaAdapter = new CinemaAdapter(getActivity(), unmain);
+                recyclerView.setAdapter(cinemaAdapter);
+            }
+
+                @Override
+                public void onFailure (Call < Cinemas > call, Throwable t){
+
+            }
+            });
+}
+
+ /*   @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        final Api service = RetrofitClientInstance.getRetrofitInstance().create(Api.class);
-        Call<Cinemas> call = service.readCinemaList();
-        call.enqueue(new Callback<Cinemas>() {
-            @Override
-            public void onResponse(Call<Cinemas> call, Response<Cinemas> response) {
-
-                List<Unmain> unmain = response.body().getResult().getUnmain();
-                Log.d("Cinema",""+unmain.size());
-
-              cinemaAdapter= new CinemaAdapter(getActivity(),unmain);
-              recyclerView.setAdapter(cinemaAdapter);
-            }
-
-            @Override
-            public void onFailure(Call<Cinemas> call, Throwable t) {
-
-            }
-        });
-
-
-    }
+    }*/
 }

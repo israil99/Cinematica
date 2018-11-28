@@ -54,10 +54,13 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
                 .into(holder.imageView);
+
+
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, MovieDetailsActivity.class);
+
                 intent.putExtra("cinemaNames",mCinemaList.get(position).getName());
                 intent.putExtra("Image",mCinemaList.get(position).getImage());
                 intent.putExtra("Actors",mCinemaList.get(position).getActors());

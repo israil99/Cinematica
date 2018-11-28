@@ -45,7 +45,7 @@ public class CinemaAdapter extends RecyclerView.Adapter<CinemaAdapter.MyViewHold
         holder.cinemaAddres.setText(mCinemaList.get(position).getAddress());
         holder.cinemaPhone.setText(mCinemaList.get(position).getPhone());
         Glide.with(mContext)
-                .load(Helper.makeImageBetter("http://kinoafisha.ua/"+ mCinemaList.get(position).getImage()))
+                .load(Helper.makeBestImage("http://kinoafisha.ua/"+ mCinemaList.get(position).getImage()))
                 .dontTransform()
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)

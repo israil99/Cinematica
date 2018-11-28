@@ -40,18 +40,27 @@ public class Tab1 extends Fragment {
         recyclerView = rootView.findViewById(R.id.recycler_view);
         GridLayoutManager manager = new GridLayoutManager(getActivity(),3);
         recyclerView.setLayoutManager(manager);
+/*
         recyclerView.setAdapter(moviesAdapter);
-
+*/
+        getResult();
 
         return rootView;
     }
 
 
-    @Override
+   /* @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
+
+
+
+    }
+*/
+
+    public void getResult(){
         final Api service = RetrofitClientInstance.getRetrofitInstance().create(Api.class);
         Call<Main> call = service.readCinemaArray();
         call.enqueue(new Callback<Main>() {
@@ -60,21 +69,14 @@ public class Tab1 extends Fragment {
                 List<Result> result = response.body().getResult();
                 Log.d("COUNT","Count :"+result.size());
 
-
-
                 moviesAdapter = new MoviesAdapter(getActivity(),result);
                 recyclerView.setAdapter(moviesAdapter);
-
-
             }
-
             @Override
             public void onFailure(Call<Main> call, Throwable t) {
-
+                Log.d("Error","Error");
             }
         });
-
-
     }
 }
 
